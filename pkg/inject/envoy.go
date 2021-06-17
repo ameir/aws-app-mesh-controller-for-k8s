@@ -225,7 +225,7 @@ func (m *envoyMutator) getVolumeMounts(pod *corev1.Pod) (map[string]string, erro
 	if v, ok := pod.ObjectMeta.Annotations[AppMeshVolumeMountsAnnotation]; ok {
 		for _, segment := range strings.Split(v, ",") {
 			pair := strings.Split(segment, ":")
-			if len(pair) != 2 { // secretName:mountPath
+			if len(pair) != 2 { // volumeName:mountPath
 				return nil, errors.Errorf("malformed annotation %s, expected format: %s", AppMeshSecretMountsAnnotation, "secretName:mountPath")
 			}
 			secretName := strings.TrimSpace(pair[0])
